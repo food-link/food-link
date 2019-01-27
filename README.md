@@ -1,4 +1,4 @@
-# food-sharing
+# Food Network
 
 ## Authors
 * **Aleck Palad** 
