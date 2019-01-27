@@ -4,7 +4,7 @@ A food donation system where the restaurants will be able to find suitable chari
 
 ## Authors
 * **Aleck Palad** 
-* **Leticia Garcia Sainzz** 
+* **Leticia Garcia Sainz** 
 * **Naymish Vaghela** 
 * **Kainan Zhang** 
 
