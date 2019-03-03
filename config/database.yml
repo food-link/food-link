@@ -48,7 +48,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: food_link_production
-  username: food_link
-  password: <%= ENV['FOOD-LINK_DATABASE_PASSWORD'] %>
+  url: <%= ENV['CLEARDB_DATABASE_URL'] %>
