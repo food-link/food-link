@@ -15,4 +15,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= reuqire freelancer.min
+//= require jqBootstrapValidation.min
 //= require_tree .
