@@ -1,0 +1,70 @@
+<body id="food_donation">
+  <section class="portfolio">
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          Food Donations
+          <%= current_user.restaurant? ? '(Restaurant)' : '(Charity)' %>
+        </div>
+        <div class="card-body">
+          <p id="notice"><%= notice %></p>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th colspan="1">ID</th>
+                <th colspan="1">Quantity</th>
+                <th colspan="1">Status</th>
+                <th colspan="2">Available</th>
+                <th colspan="5">Note</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @food_donations.each do |food_donation| %>
+                <tr>
+                  <td colspan="1">
+                    <%= food_donation.id %>
+                  </td>
+                  <td colspan="1">
+                    <%= food_donation.quantity %>
+                  </td>
+                  <td colspan="1">
+                    <%= food_donation.status %>
+                  </td>
+                  <td colspan="2">
+                    <%= food_donation.available_at %>
+                  </td>
+                  <td colspan="5">
+                    <%= food_donation.note %>
+                  </td>
+                  <td>
+                    <% if current_user.restaurant? %>
+                      <li><%= link_to 'Edit', edit_food_donation_path(food_donation) %></li>
+                      <li><%= link_to 'Cancel', food_donation, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                      <% elsif current_user.charity? %>
+                        <% if food_donation.available? %>
+                          <li><%= link_to 'Request', request_donation_food_donation_path(food_donation) %></li>
+                        <% else %>
+                          <li>
+                            <%= link_to 'Cancel' %>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br>
+            <% if current_user.restaurant? %>
+              <div class='row'>
+                <%= link_to 'New Food Donation', new_food_donation_path %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

@@ -4,7 +4,6 @@ RSpec.describe WelcomeController, type: :controller do
   let(:user) { create(:restaurant) }
 
   before do
-    user.confirm
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in(user)
   end
