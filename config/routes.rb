@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  authenticate :user do
+    resources :food_donations do
+      member do
+        get :request_donation
+      end
+    end
+  end
   devise_scope :user do
     # to resolve devise conflicting behavior
     get '/users', to: redirect('/users/sign_up')

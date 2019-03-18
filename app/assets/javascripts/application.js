@@ -20,4 +20,5 @@
 //= require turbolinks
 //= reuqire freelancer.min
 //= require jqBootstrapValidation.min
+//= require datetimepicker
 //= require_tree .

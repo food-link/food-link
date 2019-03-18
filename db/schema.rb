@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190227225704) do
+ActiveRecord::Schema.define(version: 20190311174518) do
+
+  create_table "food_donations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "restaurant_id", null: false
+    t.bigint "charity_id"
+    t.integer "quantity"
+    t.integer "status"
+    t.string "note"
+    t.text "review"
+    t.datetime "available_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "addr_line_1"

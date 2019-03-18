@@ -3,12 +3,13 @@ FactoryBot.define do
     email { 'test@gsu.com' }
     password { 'Pass123#*%($' }
     password_confirmation { password }
-
+    confirmed_at {'2000-01-01 11:11:11'}
     factory :restaurant do
+      email { 'restaurant@gsu.com' }
       role { :restaurant }
     end
-
     factory :charity do
+      email { 'charity@gsu.com' }
       role { :charity }
     end
   end

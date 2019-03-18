@@ -7,7 +7,8 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   has_one :profile, dependent: :destroy
-  accepts_nested_attributes_for :profile
+  has_many :food_donations, foreign_key: 'restaurant_id'
+  accepts_nested_attributes_for :profile, :food_donations
 
   enum role: {
     admin: 0,
