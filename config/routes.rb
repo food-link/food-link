@@ -3,8 +3,11 @@ Rails.application.routes.draw do
     resources :food_donations do
       member do
         get :request_donation
+        get :cancel
       end
     end
+
+    resource :profile, only: [:edit, :update]
   end
   devise_scope :user do
     # to resolve devise conflicting behavior
