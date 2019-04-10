@@ -38,6 +38,7 @@ gem 'jquery-rails'
 gem 'rb-readline'
 gem 'font-awesome-sass'
 gem 'jquery-easing-rails'
+gem "actionview", ">= 5.1.6.2"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
