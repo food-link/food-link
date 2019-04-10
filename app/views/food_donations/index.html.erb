@@ -1,6 +1,5 @@
 <body id="food_donation">
   <section class="portfolio">
-
     <div class="container">
       <div class="card">
         <div class="card-header">
@@ -14,7 +13,15 @@
               <tr>
                 <th colspan="1">ID</th>
                 <th colspan="1">Quantity</th>
-                <th colspan="1">Status</th>
+                <% if current_user.restaurant? %>
+                  <th colspan="1">
+                    Status
+                  </th>
+                <%end%>
+                <% if current_user.charity? %>
+                  <th colspan="1">Detail
+                  </th>
+                <% end%>
                 <th colspan="2">Available</th>
                 <th colspan="5">Note</th>
                 <th>Action</th>
@@ -30,9 +37,52 @@
                   <td colspan="1">
                     <%= food_donation.quantity %>
                   </td>
-                  <td colspan="1">
-                    <%= food_donation.status %>
-                  </td>
+                  <% if current_user.restaurant? %>
+                    <td colspan="1">
+                      <%= food_donation.status %>
+                    </td>
+                  <%end%>
+                  <% if current_user.charity? %>
+                    <td colspan="1">
+                      <a data-toggle="modal" data-target="#myModal<%= food_donation.id%>" href="">Restaurant Info</a>
+                    </td>
+                    <div id="myModal<%= food_donation.id%>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <div class="row">
+                              Name:
+                              <%= food_donation.profile.name %>
+                            </div>
+                            <div class="row">
+                              Address Line 1:
+                              <%= food_donation.profile.addr_line_1 %>
+                            </div>
+                            <div class="row">
+                              Address Line 2:
+                              <%= food_donation.profile.addr_line_2 %>
+                            </div>
+                            <div class="row">
+                              City:
+                              <%= food_donation.profile.city %>
+                            </div>
+                            <div class="row">
+                              State:
+                              <%= food_donation.profile.state %>
+                            </div>
+                            <div class="row">
+                              Zip:
+                              <%= food_donation.profile.zip %>
+                            </div>
+                            <div class="row">
+                              Phone:
+                              <%= food_donation.profile.phone_number %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end%>
                   <td colspan="2">
                     <%= food_donation.available_at %>
                   </td>
@@ -48,7 +98,7 @@
                           <li><%= link_to 'Request', request_donation_food_donation_path(food_donation) %></li>
                         <% else %>
                           <li>
-                            <%= link_to 'Cancel' %>
+                            <%= link_to 'Cancel', cancel_food_donation_path(food_donation)%>
                           </li>
                         <% end %>
                       <% end %>
@@ -60,7 +110,14 @@
             <br>
             <% if current_user.restaurant? %>
               <div class='row'>
-                <%= link_to 'New Food Donation', new_food_donation_path %>
+                <ul>
+                  <li>
+                    <%= link_to 'New Food Donation', new_food_donation_path %>
+                  </li>
+                  <li>
+                    <%= link_to 'Export Donation History', food_donations_path(format: :csv) %>
+                  </li>
+                </ul>
               </div>
             <% end %>
           </div>

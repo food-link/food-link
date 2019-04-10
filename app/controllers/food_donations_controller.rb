@@ -1,7 +1,7 @@
 class FoodDonationsController < ApplicationController
-  before_action :set_food_donation, only: %i[show edit update destroy request_donation]
+  before_action :set_food_donation, only: %i[show edit update destroy request_donation cancel]
   before_action :ensure_user_is_restaurant, only: %i[new create edit update destroy]
-  before_action :ensure_user_is_charity, only: %i[request_donation]
+  before_action :ensure_user_is_charity, only: %i[request_donation cancel]
 
   # GET /food_donations
   # GET /food_donations.json
@@ -11,6 +11,10 @@ class FoodDonationsController < ApplicationController
       @food_donations = requested_donation.empty? ? FoodDonation.all.available : requested_donation
     elsif current_user.restaurant?
       @food_donations = current_user.food_donations.all
+    end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @food_donations.to_csv, filename: "donations-#{Date.today}.csv" }
     end
   end
 
@@ -71,8 +75,17 @@ class FoodDonationsController < ApplicationController
     @food_donation.charity_id = current_user.id
     @food_donation.status = 1
     @food_donation.save
-    redirect_to food_donations_path, notice: 'You have request this food donation successfully.'
+    ApplicationMailer.request_confirm(@food_donation).deliver
+    redirect_to food_donations_path, notice: 'You have requested this food donation successfully.'
   end
+
+  def cancel
+    @food_donation.charity_id = nil
+    @food_donation.status = 0
+    @food_donation.save
+    redirect_to food_donations_path, notice: 'The request was cancelled.'
+  end
+
 
   protected
 

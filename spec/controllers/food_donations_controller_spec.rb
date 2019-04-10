@@ -29,13 +29,16 @@ RSpec.describe FoodDonationsController, type: :controller do
     create(:food_donation, user: restaurant)
   end
 
-  # describe "GET #index" do
-  #   it "returns a success response" do
-  #     FoodDonation.create! valid_attributes
-  #     get :index, params: {}, session: valid_session
-  #     expect(response).to be_successful
-  #   end
-  # end
+  describe 'GET #index' do\
+    before do
+      @request.env['devise.mapping'] = Devise.mappings[:restaurant]
+      sign_in(restaurant)
+    end
+    it 'returns a success response' do
+      get :index, format: :csv
+      expect(response.header['Content-Type']).to include 'text/csv'
+    end
+  end
   #
   # describe "GET #show" do
   #   it "returns a success response" do
@@ -111,12 +114,16 @@ RSpec.describe FoodDonationsController, type: :controller do
 
     it 'updates the status of food_donation to requested' do
       subject
-      expect(assigns[:food_donation]["status"]).to eq 'requested'
+      expect(assigns[:food_donation]['status']).to eq 'requested'
     end
 
     it 'adds charity id to food_donation' do
       subject
-      expect(assigns[:food_donation]["charity_id"]).to eq charity.id
+      expect(assigns[:food_donation]['charity_id']).to eq charity.id
+    end
+
+    it 'sends confirmation email to user' do
+      expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 

@@ -1,6 +1,11 @@
-<h1>Editing Food Donation</h1>
+<body id="food_donation">
+  <section class="portfolio">
+    <div class="container">
+      <h1>Editing Food Donation</h1>
+      <p id="notice"><%= notice %></p>
+      <%= render 'form', food_donation: @food_donation %>
 
-<%= render 'form', food_donation: @food_donation %>
-
-<%= link_to 'Show', @food_donation %> |
-<%= link_to 'Back', food_donations_path %>
+      <%= link_to 'Back', food_donations_path %>
+    </div>
+  </section>
+</body>

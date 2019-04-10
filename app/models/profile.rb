@@ -6,5 +6,4 @@ class Profile < ApplicationRecord
   # validates :zip, length: { in: 3..40 }, allow_nil: false
   # validates :name, presence: true
   # validates :state, presence: true
-
 end
