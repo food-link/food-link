@@ -91,12 +91,17 @@
                   </td>
                   <td>
                     <% if current_user.restaurant? %>
-                      <li><%= link_to 'Edit', edit_food_donation_path(food_donation) %></li>
-                      <li><%= link_to 'Cancel', food_donation, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                      <% if food_donation.available? %>
+                        <li><%= link_to 'Edit', edit_food_donation_path(food_donation) %></li>
+                        <li><%= link_to 'Cancel', food_donation, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                      <% end %>
                       <% elsif current_user.charity? %>
                         <% if food_donation.available? %>
                           <li><%= link_to 'Request', request_donation_food_donation_path(food_donation) %></li>
                         <% else %>
+                          <li>
+                            <%= link_to 'Complete', complete_food_donation_path(food_donation) %>
+                          </li>
                           <li>
                             <%= link_to 'Cancel', cancel_food_donation_path(food_donation)%>
                           </li>
