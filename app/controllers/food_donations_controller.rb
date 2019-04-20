@@ -1,7 +1,7 @@
 class FoodDonationsController < ApplicationController
-  before_action :set_food_donation, only: %i[show edit update destroy request_donation cancel]
+  before_action :set_food_donation, only: %i[show edit update destroy request_donation cancel complete]
   before_action :ensure_user_is_restaurant, only: %i[new create edit update destroy]
-  before_action :ensure_user_is_charity, only: %i[request_donation cancel]
+  before_action :ensure_user_is_charity, only: %i[request_donation cancel complete]
 
   # GET /food_donations
   # GET /food_donations.json
@@ -84,6 +84,12 @@ class FoodDonationsController < ApplicationController
     @food_donation.status = 0
     @food_donation.save
     redirect_to food_donations_path, notice: 'The request was cancelled.'
+  end
+
+  def complete
+    @food_donation.status = 2
+    @food_donation.save
+    redirect_to food_donations_path, notice: 'The food was picked up.'
   end
 
 

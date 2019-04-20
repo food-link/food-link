@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       member do
         get :request_donation
         get :cancel
+        get :complete
       end
     end
 
