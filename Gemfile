@@ -39,6 +39,9 @@ gem 'rb-readline'
 gem 'font-awesome-sass'
 gem 'jquery-easing-rails'
 gem "actionview", ">= 5.1.6.2"
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'geocoder'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
