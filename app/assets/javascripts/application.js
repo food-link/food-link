@@ -21,4 +21,7 @@
 //= reuqire freelancer.min
 //= require jqBootstrapValidation.min
 //= require datetimepicker
+//= require underscore
+//= require gmaps/google
+//= require food_donations
 //= require_tree .
