@@ -12,10 +12,9 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require jquery3
+//= require jquery2
 //= require popper
 //= require bootstrap
-//= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= reuqire freelancer.min
