@@ -38,7 +38,7 @@ class FoodDonationsController < ApplicationController
     @food_donation.status = 0
     respond_to do |format|
       if @food_donation.save
-        format.html { redirect_to food_donations_path, notice: 'Food donation was successfully created.' }
+        format.html { redirect_to food_donations_path, notice: 'Food donation was successfully created.'}
         format.json { render :show, status: :created, location: @food_donation }
       else
         format.html { render :new }

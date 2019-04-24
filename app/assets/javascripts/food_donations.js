@@ -1,6 +1,7 @@
 // Code goes here
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
+
   var map = null;
   var myMarker;
   var myLatlng;
